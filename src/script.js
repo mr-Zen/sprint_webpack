@@ -20,19 +20,21 @@ let infoProf = document.querySelector(".user-info__job");
 const nameUser = formAdd.elements.name;
 const linkUser = formAdd.elements.link;
 
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort3' : 'https://praktikum.tk/cohort3'
 // Можно улучшить имя скорее config для объекта
 const constructor = { 
-  ip: "95.216.175.5",
-  id: "cohort3",
+  ip: serverUrl,
+  //id: "cohort3",
   token: "fa398ac4-e481-4ab2-ab2e-44918f0de62f",
   name: userEdit,
   about: userProf
 };
 
+
 class Api {
-  constructor({ ip, id, token, name, about }) {
+  constructor({ ip, /*id,*/ token, name, about }) {
     this.ip = ip;
-    this.id = id;
+    //this.id = id;
     this.token = token;
     this.name = name;
     this.about = about;
@@ -45,7 +47,7 @@ class Api {
 
   getUserId() {
     return ( // можно лучше достаточно return fetch - лучше указывать протокол
-      fetch(`//${this.ip}/${this.id}/users/me`, {
+      fetch(`${this.ip}/users/me`, {
         method: "GET", // Хорошо - указан тип запроса
         headers: {
           authorization: this.token,
@@ -85,7 +87,7 @@ class Api {
   }
 
   getInitialCards() {
-    return fetch(`//${this.ip}/${this.id}/cards`, {
+    return fetch(`${this.ip}/cards`, {
       method: "GET",
       headers: {
         authorization: this.token,
@@ -111,7 +113,7 @@ class Api {
 
   editProfile(name, about) {
     return (
-      fetch(`//${this.ip}/${this.id}/users/me`, {
+      fetch(`${this.ip}/users/me`, {
         /**
          * Можно улучшить - часть адреса http может меняться на https
          * на разных серверах - стоит предусмотреть легкую смену без редактирования
@@ -154,7 +156,7 @@ class Api {
     );
   }
   postCard(name, link) {
-    return fetch(`//${this.ip}/${this.id}/cards`, {
+    return fetch(`//${this.ip}/cards`, {
       method: "POST",
       headers: {
         authorization: this.token,
@@ -313,7 +315,7 @@ class PopupImg {
       let template = `<div class="popup-container">
     <div class="popup-container__image">
       <img class="popup__image" src=${img[1]}>
-      <img src="./images/close.svg" alt="" id = 'dell' class="popup__close">
+      <img src="<%=require('./images/close.svg')%>" alt="" id = 'dell' class="popup__close">
     </div>
   </div>`;
 
