@@ -1,5 +1,6 @@
 import {config, cardsBox} from './variable.js';
 import CardList from './cardlist'
+import {renderLoading} from './helpers.js'
 
 export class Api {
   constructor({ ip, /*id,*/ token, name, about }) {

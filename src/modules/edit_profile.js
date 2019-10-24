@@ -1,5 +1,9 @@
-import {formEdit} from './variable.js'
+import {formEdit, userEdit, userProf, infoName, infoProf} from './variable.js';
+import {renderLoading} from './helpers.js';
+import {popupSwitch, formNone} from './helpers.js';
+import {api} from './api.js'
 
+//Редактирование профиля
 export default formEdit.addEventListener("submit", function(event) {
     event.preventDefault();
     renderLoading(true);
@@ -10,3 +14,4 @@ export default formEdit.addEventListener("submit", function(event) {
     popupSwitch();
     formNone();
   });
+  
